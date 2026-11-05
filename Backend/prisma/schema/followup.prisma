@@ -1,0 +1,23 @@
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+model FollowUp {
+  id Int @id @default(autoincrement())
+
+  leadId Int
+  lead   Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  executiveId Int
+  executive   User @relation(fields: [executiveId], references: [id])
+
+  callId      Int?
+  scheduledAt DateTime
+  status      FollowUpStatus @default(PENDING)
+  notes       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

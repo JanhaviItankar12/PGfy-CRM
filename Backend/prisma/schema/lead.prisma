@@ -1,0 +1,32 @@
+enum LeadStatus {
+  NEW
+  CONTACTED
+  INTERESTED
+  NOT_INTERESTED
+  FOLLOW_UP
+  VISIT_SCHEDULED
+  CONVERTED
+}
+
+model Lead {
+  id                Int        @id @default(autoincrement())
+  customerName      String
+  mobile            String
+  email             String?
+  propertyCategory  String
+  preferredLocation String
+  budget            Float
+  leadSource        String
+  status            LeadStatus @default(NEW)
+
+  enquiryDate DateTime @default(now())
+
+  assignedToId Int?
+  assignedTo   User? @relation(fields: [assignedToId], references: [id])
+
+  calls     Call[]
+  followUps FollowUp[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -1,0 +1,19 @@
+enum Role {
+  ADMIN
+  SALES_EXECUTIVE
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+  role     Role   @default(SALES_EXECUTIVE)
+
+  assignedLeads Lead[]
+  calls         Call[]
+  followUps     FollowUp[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

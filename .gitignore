@@ -1,0 +1,15 @@
+# Environment files
+Frontend/.env
+Backend/.env
+
+# Dependencies
+node_modules/
+
+# Build files
+dist/
+
+# Logs
+*.log
+
+# Editor files
+.vscode/

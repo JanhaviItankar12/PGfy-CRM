@@ -1,0 +1,30 @@
+enum CallOutcome {
+  CONNECTED
+  NOT_ANSWERED
+  BUSY
+  SWITCHED_OFF
+  INTERESTED
+  NOT_INTERESTED
+  CALL_BACK_REQUESTED
+  VISIT_SCHEDULED
+  CONVERTED
+}
+
+model Call {
+  id Int @id @default(autoincrement())
+
+  leadId Int
+  lead   Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  executiveId Int
+  executive   User @relation(fields: [executiveId], references: [id])
+
+  callDateTime DateTime
+  duration     Int
+  outcome      CallOutcome
+  notes        String?
+
+  nextFollowUpAt DateTime?
+
+  createdAt DateTime @default(now())
+}
