@@ -18,9 +18,9 @@ A role-based Sales CRM application developed to manage leads, sales executives, 
 **Database & ORM**
 - PostgreSQL
 - Prisma ORM 7.10.1
-- `@prisma/client`
-- `@prisma/adapter-pg`
-- `pg`
+- @prisma/client
+- @prisma/adapter-pg
+- pg
 
 **Authentication**
 - JWT
@@ -48,7 +48,7 @@ A role-based Sales CRM application developed to manage leads, sales executives, 
 - Dummy data for testing.
 - Report generation in the Admin Panel.
 
-> Add call tracking, follow-ups, and analytics here only after implementing and testing them.
+> Additional features such as call tracking, follow-ups, and advanced analytics can be added as future improvements.
 
 ## Project Structure
 
@@ -59,9 +59,14 @@ PGfy-Sales-CRM/
 │   └── ...
 │
 ├── Backend/
-│   │
 │   ├── prisma/
-│   │   └── schema.prisma
+│   │   ├── schema/
+│   │   │   └── schema.prisma
+│   │   ├── migrations/
+│   │   │   ├── migration_lock.toml
+│   │   │   └── 20261103150343_init/
+│   │   │       └── migration.sql
+│   │   └── seed.ts
 │   │
 │   ├── src/
 │   │   ├── config/
@@ -72,7 +77,7 @@ PGfy-Sales-CRM/
 │   ├── prisma.config.ts
 │   ├── server.ts
 │   ├── package.json
-│   └── .env
+│   └── .env.example
 │
 ├── ai-logs/
 │   ├── day-1.md
@@ -83,9 +88,9 @@ PGfy-Sales-CRM/
 
 ## Prerequisites
 
-Make sure you have installed:
+Make sure the following software is installed:
 
-- Node.js
+- Node.js (LTS version)
 - npm
 - PostgreSQL
 - Git
@@ -108,110 +113,9 @@ npm install
 
 ### 3. Configure Environment Variables
 
-Create a `.env` file inside the `Backend` directory.
+Create a `.env` file inside the `Backend` directory using `.env.example` as a reference.
+
+**Backend/.env.example**
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/pgfy_crm"
-JWT_SECRET="your_secret_key"
-PORT=5000
-```
-
-Replace the database username, password, and database name with your PostgreSQL configuration.
-
-### 4. Prisma Configuration
-
-This project uses Prisma ORM 7.10.1 with the PostgreSQL adapter.
-
-Required packages:
-
-```bash
-npm install prisma@^7.10.1 @prisma/client@^7.10.1 @prisma/adapter-pg@^7.10.1 pg
-```
-
-Prisma schema location:
-
-```text
-Frontend/prisma/schema.prisma
-```
-
-Prisma configuration location:
-
-```text
-Backend/prisma.config.ts
-```
-
-Generate Prisma Client:
-
-```bash
-npx prisma generate
-```
-
-Run database migrations:
-
-```bash
-npx prisma migrate dev --name init
-```
-
-If migrations already exist, use the existing migration history rather than creating a duplicate initial migration.
-
-### 5. Start the Backend
-
-```bash
-npm run dev
-```
-
-### 6. Frontend Setup
-
-Open another terminal:
-
-```bash
-cd Frontend
-npm install
-npm run dev
-```
-
-The frontend will run at the local URL provided by Vite.
-
-## Application Workflow
-
-1. The user logs in using their credentials.
-2. The backend validates the login credentials.
-3. JWT authentication is used to authorize requests.
-4. Role-based access determines which panel the user can access.
-5. Admin users access the Admin Panel.
-6. Sales Executives access the Sales Executive Panel.
-7. Lead data is fetched from the PostgreSQL database.
-8. Admin users can generate reports from the Admin Panel.
-
-## Database
-
-PostgreSQL is used as the primary database, and Prisma ORM is used to interact with it.
-
-The database schema is maintained in:
-
-```text
-Backend/prisma/schema.prisma
-```
-
-## AI-Assisted Development
-
-AI tools were used during development for guidance, implementation assistance, UI design, and debugging.
-
-- **ChatGPT:** Assignment understanding, database design, Prisma configuration, backend implementation guidance, authentication, role-based access control, and debugging.
-- **Claude:** Frontend page design and UI development assistance.
-
-Detailed AI usage records are available in the `ai-logs` directory:
-
-- `day-1.md` – Day 1 development activities and AI assistance.
-- `day-2.md` – Day 2 development activities and AI assistance.
-
-## Future Improvements
-
-- Complete call tracking and call outcome history.
-- Follow-up scheduling and reminders.
-- Advanced sales performance analytics.
-- Additional report formats and filtering options.
-
-## Author
-
-Developed as part of the PGfy Sales CRM & Call Tracking technical assignment.
+DATABASE_URL="postgresql
